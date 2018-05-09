@@ -18,4 +18,8 @@ serve:
 
 shell:
 	@docker rm -f tpc-shell 2>/dev/null || true
-	@docker run --rm -it --name tpc-shell --entrypoint "/bin/bash" hivdb/tpc-all
+	@docker run --rm -it --name tpc-shell \
+		-v $(shell pwd)/data/luceneindex:/data/luceneindex \
+		-v $(shell pwd)/data/tpcas:/data/tpcas \
+		-v $(shell pwd)/data/tpcas:/data/postgres \
+		--entrypoint "/bin/bash" hivdb/tpc-all
